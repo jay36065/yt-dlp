@@ -305,8 +305,8 @@ class TwitCastingUserIE(InfoExtractor):
                 next_url, uploader_id, query={'filter': 'watchable'}, note=f'Downloading page {page_num}')
             matches = re.finditer(                    
                 r'(?s)<a\s+class="tw-movie-thumbnail2"\s+href="(?P<url>/[^/"]+/movie/\d+)"', webpage)
-            print(matches)
             for mobj in matches:
+                print(mobj)
                 yield self.url_result(urljoin(base_url, mobj.group('url')))
 
             next_url = self._search_regex(
@@ -315,7 +315,7 @@ class TwitCastingUserIE(InfoExtractor):
             print("Regex: ",next_url)
             next_url = urljoin(base_url, next_url)
             print("Joined: ",next_url)
-            next_url = "https://twitcasting.tv/_ks__xn/archive?type=history&page=6-821513262&watchable=1"
+            next_url = "https://twitcasting.tv/{uploader_id}/archive?type=history&page=6-821513262&watchable=1"
             if not next_url:
                 return
 
