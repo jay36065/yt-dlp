@@ -319,7 +319,8 @@ class TwitCastingUserIE(InfoExtractor):
             next_url = f"https://twitcasting.tv/{uploader_id}/archive?type=history&page={page_num}"
             print("After: ", next_url)
             print("Initial: ", ini)
-            if page_num == allpage:
+            print(page_num)
+            if page_num == int(allpage):
                 return
 
     def _real_extract(self, url):
