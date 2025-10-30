@@ -301,6 +301,7 @@ class TwitCastingUserIE(InfoExtractor):
     def _entries(self, uploader_id):
         base_url = next_url = f'https://twitcasting.tv/{uploader_id}/show'
         ini = f"https://twitcasting.tv/{uploader_id}/archive?type=history&page=0"
+        allpage = input("Pages?:")
         for page_num in itertools.count(1):
             webpage = self._download_webpage(
                 next_url, uploader_id, query={'filter': 'watchable'}, note=f'Downloading page {page_num}')
@@ -318,10 +319,7 @@ class TwitCastingUserIE(InfoExtractor):
             next_url = f"https://twitcasting.tv/{uploader_id}/archive?type=history&page={page_num}"
             print("After: ", next_url)
             print("Initial: ", ini)
-            print(self._download_webpage(next_url, uploader_id, query={'filter': 'watchable'}) == self._download_webpage(ini, uploader_id, query={'filter': 'watchable'}))
-            print(self._download_webpage(next_url, uploader_id, query={'filter': 'watchable'}))
-            print(self._download_webpage(ini, uploader_id, query={'filter': 'watchable'}))
-            if self._download_webpage(next_url, uploader_id, query={'filter': 'watchable'}) == self._download_webpage(ini, uploader_id, query={'filter': 'watchable'}):
+            if page_num == allpage:
                 return
 
     def _real_extract(self, url):
