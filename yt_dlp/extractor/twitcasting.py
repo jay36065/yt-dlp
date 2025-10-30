@@ -299,9 +299,9 @@ class TwitCastingUserIE(InfoExtractor):
     }]
 
     def _entries(self, uploader_id):
+        allpage = input("Pages?:")
         base_url = next_url = f'https://twitcasting.tv/{uploader_id}/show'
         ini = f"https://twitcasting.tv/{uploader_id}/archive?type=history&page=0"
-        allpage = input("Pages?:")
         for page_num in itertools.count(1):
             webpage = self._download_webpage(
                 next_url, uploader_id, query={'filter': 'watchable'}, note=f'Downloading page {page_num}')
