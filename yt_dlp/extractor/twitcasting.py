@@ -306,17 +306,17 @@ class TwitCastingUserIE(InfoExtractor):
             matches = re.finditer(                    
                 r'(?s)<a\s+class="tw-movie-thumbnail2"\s+href="(?P<url>/[^/"]+/movie/\d+)"', webpage)
             for mobj in matches:
-                print(mobj)
                 yield self.url_result(urljoin(base_url, mobj.group('url')))
 
             next_url = self._search_regex(
                 r'<a href="(/%s/show/%d-\d+)[?"]' % (re.escape(uploader_id), page_num),
                 webpage, 'next url', default=None)
-            print("Regex: ",next_url)
+            print("Regex: ", next_url)
             next_url = urljoin(base_url, next_url)
-            print("Joined: ",next_url)
+            print("Joined: ", next_url)
             next_url = f"https://twitcasting.tv/{uploader_id}/archive?type=history&page={page_num}"
-            if not next_url:
+            print("After: ", next_url)
+            if self._download_webpage(next_url, uploader_id, query={'filter': 'watchable'}) == self._download_webpage(f"https://twitcasting.tv/{uploader_id}/archive?type=history&page=0", uploader_id, query={'filter': 'watchable'}):
                 return
 
     def _real_extract(self, url):
