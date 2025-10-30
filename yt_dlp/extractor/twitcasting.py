@@ -315,6 +315,7 @@ class TwitCastingUserIE(InfoExtractor):
             print("Regex: ",next_url)
             next_url = urljoin(base_url, next_url)
             print("Joined: ",next_url)
+            next_url = "https://twitcasting.tv/_ks__xn/archive?type=history&page=6-821513262&watchable=1"
             if not next_url:
                 return
 
