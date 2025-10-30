@@ -311,7 +311,9 @@ class TwitCastingUserIE(InfoExtractor):
             next_url = self._search_regex(
                 r'<a href="(/%s/show/%d-\d+)[?"]' % (re.escape(uploader_id), page_num),
                 webpage, 'next url', default=None)
+            print("Regex: ",next_url)
             next_url = urljoin(base_url, next_url)
+            print("Joined: ",next_url)
             if not next_url:
                 return
 
